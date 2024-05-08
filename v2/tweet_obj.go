@@ -41,7 +41,8 @@ const (
 	// TweetFieldSource is the name of the app the user Tweeted from.
 	TweetFieldSource TweetField = "source"
 	// TweetFieldWithHeld contains withholding details
-	TweetFieldWithHeld TweetField = "withheld"
+	TweetFieldWithHeld  TweetField = "withheld"
+	TweetFieldNoteTweet TweetField = "note_tweet"
 )
 
 func tweetFieldStringArray(arr []TweetField) []string {
@@ -73,6 +74,12 @@ type TweetObj struct {
 	ReferencedTweets   []*TweetReferencedTweetObj   `json:"referenced_tweets,omitempty"`
 	Source             string                       `json:"source,omitempty"`
 	WithHeld           *WithHeldObj                 `json:"withheld,omitempty"`
+	NoteTweet          *NoteTweetObj                `json:"note_tweet,omitempty"`
+}
+
+type NoteTweetObj struct {
+	Entities *EntitiesObj `json:"entities,omitempty"`
+	Text     string       `json:"text"`
 }
 
 // TweetAttachmentsObj specifics the type of attachment present in the tweet

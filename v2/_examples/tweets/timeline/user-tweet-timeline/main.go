@@ -19,12 +19,17 @@ func (a authorize) Add(req *http.Request) {
 	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", a.Token))
 }
 
-/**
+/*
+*
+
 	In order to run, the user will need to provide the bearer token and the list of tweet ids.
-**/
+
+*
+*/
 func main() {
 	token := flag.String("token", "", "twitter API token")
 	userID := flag.String("user_id", "", "user id")
+
 	flag.Parse()
 
 	client := &twitter.Client{
@@ -35,7 +40,7 @@ func main() {
 		Host:   "https://api.twitter.com",
 	}
 	opts := twitter.UserTweetTimelineOpts{
-		TweetFields: []twitter.TweetField{twitter.TweetFieldCreatedAt, twitter.TweetFieldAuthorID, twitter.TweetFieldConversationID, twitter.TweetFieldPublicMetrics, twitter.TweetFieldContextAnnotations},
+		TweetFields: []twitter.TweetField{twitter.TweetFieldCreatedAt, twitter.TweetFieldAuthorID, twitter.TweetFieldConversationID, twitter.TweetFieldPublicMetrics, twitter.TweetFieldContextAnnotations, twitter.TweetFieldNoteTweet},
 		UserFields:  []twitter.UserField{twitter.UserFieldUserName},
 		Expansions:  []twitter.Expansion{twitter.ExpansionAuthorID},
 		MaxResults:  5,
